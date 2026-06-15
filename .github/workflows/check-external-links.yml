@@ -1,0 +1,87 @@
+name: Check external links
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday at 9am UTC
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check URLs and report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 - <<'EOF'
+          import os, re, subprocess, sys, urllib.request, urllib.error
+
+          url_re = re.compile(r'https?://[^\s\)\]>\"\']+')
+          code_block = re.compile(r'```.*?```', re.DOTALL)
+
+          dead = []  # list of (url, file)
+
+          for root, _, files in os.walk("."):
+            if root.startswith("./.git") or root.startswith("./.obsidian"):
+              continue
+            for f in files:
+              if not f.endswith(".md"):
+                continue
+              path = os.path.join(root, f)
+              with open(path) as fh:
+                text = fh.read()
+              text_no_code = code_block.sub("", text)
+              for url in dict.fromkeys(url_re.findall(text_no_code)):  # dedupe per file
+                url = url.rstrip(".,;)")
+                try:
+                  req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}, method="HEAD")
+                  resp = urllib.request.urlopen(req, timeout=10)
+                  if resp.status >= 400:
+                    dead.append((url, path, resp.status))
+                except urllib.error.HTTPError as e:
+                  if e.code >= 400:
+                    dead.append((url, path, e.code))
+                except Exception as e:
+                  dead.append((url, path, str(e)))
+
+          if not dead:
+            print("All external links OK.")
+            sys.exit(0)
+
+          # Build issue body
+          lines = ["The following external links appear to be broken:\n"]
+          for url, path, status in dead:
+            lines.append(f"- `{path}`: [{url}]({url}) — `{status}`")
+          body = "\n".join(lines)
+          print(body)
+
+          # Check for existing open issue with our label to avoid duplicates
+          result = subprocess.run(
+            ["gh", "issue", "list", "--label", "broken-links", "--state", "open", "--json", "number"],
+            capture_output=True, text=True
+          )
+          existing = result.stdout.strip()
+          if existing and existing != "[]":
+            print("Open broken-links issue already exists — skipping creation.")
+            sys.exit(0)
+
+          # Ensure label exists
+          subprocess.run(
+            ["gh", "label", "create", "broken-links", "--color", "e4e669",
+             "--description", "Automatically detected broken external links", "--force"],
+            check=False
+          )
+
+          subprocess.run(
+            ["gh", "issue", "create",
+             "--title", "Broken external links detected",
+             "--label", "broken-links",
+             "--body", body],
+            check=True
+          )
+          EOF

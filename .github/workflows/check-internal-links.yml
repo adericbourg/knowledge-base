@@ -1,0 +1,53 @@
+name: Check internal links
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check wikilinks
+        run: |
+          python3 - <<'EOF'
+          import os, re, sys
+
+          notes = {}
+          for root, _, files in os.walk("."):
+            if root.startswith("./.git") or root.startswith("./.obsidian"):
+              continue
+            for f in files:
+              if f.endswith(".md"):
+                # Store by stem (filename without extension), case-insensitive
+                stem = f[:-3].lower()
+                notes[stem] = os.path.join(root, f)
+
+          broken = []
+          wikilink = re.compile(r'\[\[([^\]|#]+?)(?:[|#][^\]]*)?\]\]')
+
+          for root, _, files in os.walk("."):
+            if root.startswith("./.git") or root.startswith("./.obsidian"):
+              continue
+            for f in files:
+              if not f.endswith(".md"):
+                continue
+              path = os.path.join(root, f)
+              with open(path) as fh:
+                for lineno, line in enumerate(fh, 1):
+                  for m in wikilink.finditer(line):
+                    target = m.group(1).strip().lower()
+                    if target not in notes:
+                      broken.append(f"{path}:{lineno}: [[{m.group(1)}]]")
+
+          if broken:
+            print("Broken wikilinks found:")
+            for b in broken:
+              print(f"  {b}")
+            sys.exit(1)
+          else:
+            print(f"All wikilinks OK ({len(notes)} notes checked).")
+          EOF
