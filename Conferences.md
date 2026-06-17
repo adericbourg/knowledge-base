@@ -11,10 +11,10 @@
 | [FlowCon](https://flowcon.io/) | Montrouge (Paris) | | Mars–Avril |
 | [SoCraTes Drôme](https://socrates-fr.github.io/) | Drôme Provençale | Open Space | Mars |
 | [Devoxx France](https://www.devoxx.fr/) | Paris | Nov–Jan | Avril |
-| [Spring I/O](https://springio.net/) 🚄 | Barcelone | | Avril |
+| [Spring I/O](https://springio.net/) 🚄 | Barcelone | Oct–Jan | Avril |
 | [SoCraTes](https://socrates-rennes.github.io/) | Rennes | Open Space | Avril |
 | [Lyon Craft](https://lyon-craft.fr/) | Lyon | | Avril |
-| [MiXiT](https://mixitconf.org) | Lyon | | Mai |
+| [MiXiT](https://mixitconf.org) | Lyon | Nov–Jan | Mai |
 | [AlpesCraft](https://www.alpescraft.fr/) | Grenoble | | Mai |
 | [France API](https://franceapi.fr) | Paris | | Juin |
 | [DevLille](https://devlille.fr/) | Lille | | Juin |
@@ -27,16 +27,16 @@
 | [Riviera DEV](https://rivieradev.fr/) | Sophia Antipolis | | Juillet |
 | [JUG Summer Camp](https://www.jugsummercamp.org) | La Rochelle | | Septembre |
 | [Geek Camp d'automne](https://okiwi.org/geek-camp/) | Ruffiac (47) | Open Space | Septembre |
-| [VolCamp](https://www.volcamp.io/) | Clermont-Ferrand | | Octobre |
+| [VolCamp](https://www.volcamp.io/) | Clermont-Ferrand | Mars–Mai | Octobre |
 | [DevFest Nantes](https://devfest.gdgnantes.com) | Nantes | | Octobre |
 | [Nantes Craft](https://www.nantes-craft.fr/) | Nantes | | Octobre |
-| [Devoxx](https://devoxx.be/) 🚄 | Anvers | | Octobre |
+| [Devoxx](https://devoxx.be/) 🚄 | Anvers | Juin–Juil | Octobre |
 | [BDX I/O](https://bdxio.fr/) | Bordeaux | | Novembre |
 | [Codeurs en Seine](https://www.codeursenseine.com) | Rouen | | Novembre |
 | [DevFest Paris](https://devfest.gdgparis.fr/) | Nanterre | | Novembre |
 | [DevOps REX](https://www.devopsrex.fr/) | Paris | | Décembre |
 | [Numérique en Commun[s]](https://numerique-en-communs.fr/) | Strasbourg | | Décembre |
-| [Open Source Experience](https://www.opensource-experience.com/) | Paris | | Décembre |
+| [Open Source Experience](https://www.opensource-experience.com/) | Paris | Avr–Juin | Décembre |
 
 ## Replay en ligne
 
