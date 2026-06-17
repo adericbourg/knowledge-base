@@ -22,6 +22,7 @@
 | [DDD Europe](https://dddeurope.com/) 🚄 | Anvers | | Juin |
 | [Geek Camp de printemps](https://okiwi.org/geek-camp/) | Ruffiac (47) | Open Space | Juin |
 | [DevQuest](https://www.devquest.fr/) | Niort | | Juin |
+| [Voxxed Days Luxembourg](https://luxembourg.voxxeddays.com/fr/) 🚄 | Mondorf-les-Bains (Luxembourg) | Fév–Mars | Juin |
 | [Sunny Tech](https://sunny-tech.io/) | Montpellier | Dec–Mar | Juillet |
 | [Riviera DEV](https://rivieradev.fr/) | Sophia Antipolis | | Juillet |
 | [JUG Summer Camp](https://www.jugsummercamp.org) | La Rochelle | | Septembre |
